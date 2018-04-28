@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>二级联动</title>
+    <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<style type="text/css">
+
+</style>
+<body>
+
+<div class="sel_choose">
+    <!-- 1 -->
+    <select id="provices">
+        <option value="-1">请选择省份</option>
+        <option value="0">浙江</option>
+        <option value="1">江西</option>
+        <option value="2">湖南</option>
+    </select>
+    <!-- 2 -->
+    <select id="city">
+        <option value="-1">请选择城市</option>
+    </select>
+</div>
+
+<script>
+
+$(function(){
+
+    // 创建数组，一个省份的所有城市
+    var citys = new Array(3);
+    // 
+    citys[0] = new Array("义乌","金华","杭州","东阳");
+    citys[1] = new Array("南昌","九江");
+    citys[2] = new Array("长沙","衡阳","常德","永州");
+
+    $("#provices").change(function(){
+
+        $("#city").empty();  //清空【城市】列表
+        var val = this.value;
+        var html ;
+        if( val == "-1"){
+            $("#city").html("<option>请选择城市</option>");
+        }else{
+            for( var i = 0; i<citys[val].length;i++){
+                html+='<option>' + citys[val][i] + '</option>';
+            }
+        }
+        $("#city").html(html);
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

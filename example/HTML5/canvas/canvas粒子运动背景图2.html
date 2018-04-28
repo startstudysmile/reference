@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+            *{margin: 0;padding: 0;}
+            html,body{
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="cvs" width="100%" height="100%"></canvas>
+        <script type="text/javascript">
+            var bgcvs = {
+                init:function(){
+                    //canvas环境搭建
+                    this.cvs = document.getElementById('cvs');
+                    this.cvs.width = window.innerWidth;
+                    this.cvs.height = window.innerHeight;
+                    this.ctx = this.cvs.getContext('2d');
+                    //canvas环境搭建完成
+
+                    //定义粒子对象200个(200个小点点随机大小)
+                    this.circleArr = [];
+                    for(var i=0;i<200;i++){
+                        this.circleArr.push({
+                            x : Math.random() * this.cvs.width,//x是小点点的圆心坐标X值，使用Math.random()函数随机位置，下同
+                            y : Math.random() * this.cvs.height,//y是小点点的圆心坐标Y值
+                            r : Math.random()*4+2,//r为小点点的半径，随机大小，这里最小为2.xxx
+                            sx:Math.random() /2-0.25,//sx(speedX)x轴方向的移动速度
+                            sy:Math.random()/2-0.25//sy(speedY)y轴方向的移动速度
+                        });
+                    }
+                    this.play();
+                },
+                play:function(){
+                    var cvs = bgcvs.cvs , 
+                        ctx = bgcvs.ctx , 
+                        circleArr = bgcvs.circleArr,//粒子对象这个不用说了 ，上面定义的
+                        connectPoint = [];//该数组用来存放加了连接标记的点(只有这里的点才和别的点连接)
+                    ctx.clearRect(0,0,cvs.width,cvs.height);//因为canvas需要不断重绘所以要先清除画布
+                    var my_gradient=ctx.createLinearGradient(cvs.width/2,0,cvs.width / 2,cvs.height);//这里是canvas的渐变背景色
+                    my_gradient.addColorStop(0,"#FFF0F5 ");
+                    my_gradient.addColorStop(1,"#6A5ACD");
+                    ctx.fillStyle=my_gradient;//这里是canvas的渐变背景色 结束
+                    ctx.fillRect(0,0,cvs.width,cvs.height);
+                    ctx.fillStyle = 'white';
+                    var lingshiArr = circleArr;
+                    for(var i=0;i<circleArr.length;i++){
+                        var x = circleArr[i].x , y = circleArr[i].y , r = circleArr[i].r ,  sx = circleArr[i].sx , sy = circleArr[i].sy;//获取基本的变量，为了操作方便
+                        if(x <= r || x >= cvs.width - r){//这里的判断是，当小点点X轴运动到左右两边时回弹
+                            circleArr[i].sx = -circleArr[i].sx;
+                            circleArr[i].sy = circleArr[i].sy;
+                        }
+                        if(y <= r || y >= cvs.height - r){//这里的判断是，当小点点Y轴运动到上下两边时回弹
+                            circleArr[i].sx = circleArr[i].sx;
+                            circleArr[i].sy = -circleArr[i].sy;
+                        }
+                        ctx.beginPath();//开始绘制小点点
+                        ctx.shadowColor = 'white';
+                        ctx.shadowBlur = 3;
+                        ctx.arc(x,y,r,0,Math.PI*2,false);
+                        ctx.fill();
+                        ctx.closePath();//结束绘制小点点
+                        circleArr[i].x -= circleArr[i].sx / 2;
+                        circleArr[i].y -= circleArr[i].sy / 2;//改变小点点的X值\Y值让小点点动起来
+                        if(i < circleArr.length - 2 && i % 2 == 0){//这里判断%2为0的小点点让它具备连接其他点的权限
+                            var pointObj = {};
+                            pointObj.firstPoint = circleArr[i];
+                            pointObj.secondArr = [];
+                            for(var j = 0;j<lingshiArr.length;j++){
+                                if(checkPoint(circleArr[i],lingshiArr[j]) <=100 && checkPoint(circleArr[i],lingshiArr[j]) >= 20){//判断小点点是否在连接点的范围内即>20px <100px范围内
+                                    pointObj.secondArr.push(lingshiArr[j]);
+                                    //lingshiArr.splice(i, 1);
+                                }
+                            }
+                            connectPoint.push(pointObj);
+                        }
+                    }
+                    drawLine(connectPoint);
+                    window.requestAnimationFrame(bgcvs.play);
+                    function drawLine(connetPointArr){
+                        ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+                        ctx.lineWidth = 1;
+                        ctx.shadowBlur = 0;
+                        ///两层循环，以连接点为起始点，不断向范围内的点连接，最理想的情况下是蒲公英的样子即一对多
+                        for(var k = 0;k<connetPointArr.length;k++){
+                            var firstPoint = connetPointArr[k].firstPoint;
+                            var secondArr = connetPointArr[k].secondArr;
+                            for(var z=0;z<secondArr.length;z++){
+                                ctx.beginPath();
+                                ctx.moveTo(firstPoint.x,firstPoint.y);
+                                ctx.lineTo(secondArr[z].x,secondArr[z].y);
+                                ctx.stroke();
+                                ctx.closePath();
+                            }
+                        }
+                    };
+                    function checkPoint(startPoint,targetPoint){//固定判断点是否在圆周内的方法
+                        var xdiff = targetPoint.x - startPoint.x,
+                            ydiff = targetPoint.y - startPoint.y;
+                        return Math.pow((xdiff * xdiff + ydiff * ydiff),0.5);
+                    };
+                }
+            };
+            bgcvs.init();
+        </script>
+    </body>
+</html>

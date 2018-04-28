@@ -1,0 +1,426 @@
+/*
+ 	* @description: 中文说明
+	* @author: 柳梦蝶
+	* @update: 柳梦蝶(2018-04-27 15:16)
+*/
+
+@charset "utf-8";
+* {
+    margin: 0px;
+    padding: 0px;
+}
+/*设置滚动条样式*/
+
+html,
+body {
+	/*滚动条整体部分，其中的属性有width,height,background,border（就和一个块级元素一样）等。*/
+	-webkit-scrollbar :;
+	/*滚动条两端的按钮。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果。 */
+    -webkit-scrollbar-button:;
+    /*   外层轨道。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果。*/
+    -webkit-scrollbar-track:;
+    /*内层轨道，滚动条中间部分（除去）。*/ 
+    -webkit-scrollbar-track-piece:;
+    /*滚动条里面可以拖动的那部分*/ 
+    -webkit-scrollbar-thumb:;
+    /*边角 */
+    -webkit-scrollbar-corner:;
+    /*定义右下角拖动块的样式*/
+    -webkit-resizer:;
+	
+    /*scrollbar-face-color: #EEEEEE;*/
+    /*滚动条3D表面（ThreedFace）的颜色*/
+    /*scrollbar-highlight-color: #fff;*/
+    /*滚动条3D界面的亮边（ThreedHighlight）颜色*/
+    /*scrollbar-shadow-color: #eeeeee;*/
+    /*滚动条3D界面的暗边（ThreedShadow）颜色*/
+    /*scrollbar-3dlight-color: #eeeeee;*/
+    /*滚动条亮边框颜色*/
+    /*scrollbar-arrow-color: #EEEEEE;*/
+    /*滚动条方向箭头的颜色 */
+    /*scrollbar-track-color: #fff;*/
+    /*滚动条的拖动区域(TrackBar)颜色*/
+    /*scrollbar-darkshadow-color: #fff;*/
+    /*滚动条暗边框（ThreedDarkShadow）颜色*/
+}
+
+body {
+    background: #FFFFFF;
+    color: #333;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+ul,
+li,
+ol,
+dl,
+dt,
+dd {
+    list-style: none;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    outline: 0 none;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: #1F376D;
+}
+
+a:hover,
+a:active {
+    text-decoration: none;
+    color: #BD0A01;
+    border: none;
+}
+
+button,
+input,
+select {
+    vertical-align: middle;
+}
+
+button{
+    cursor: pointer;
+}
+
+img {
+    border: 0 none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.overflow-h {
+    overflow: hidden;
+}
+
+.cl {
+    clear: both;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.none {
+    display: none
+}
+
+.block {
+    display: block
+}
+
+.inline {
+    display: inline-block
+}
+
+.maskLayer {
+    z-index: 9999;
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0px 16px;
+    height: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #EDEDED;
+}
+
+.border1 {
+    border: 1px solid #DDDDDD;
+}
+
+.t-l {
+    text-align: left;
+}
+
+.t-c {
+    text-align: center;
+}
+
+.t-r {
+    text-align: right;
+}
+
+.vm {
+    vertical-align: middle
+}
+
+.Break {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.Nobreak {
+    word-break: keep-all;
+    word-wrap: normal;
+}
+
+
+/*颜色类公共样式*/
+
+.color-write {
+    color: #FFFFFF;
+}
+
+.color-red {
+    color: #e8470a;
+}
+
+.color-red1 {
+    color: #F00;
+}
+
+.color-yellow {
+    color: #bf0000;
+}
+
+.color-green {
+    color: #85c226;
+}
+
+.color-blue {
+    color: #007BFF;
+}
+
+.color-blue1 {
+    color: #0069D9;
+}
+
+
+/*背景颜色样式*/
+
+.bg-red {
+    background-color: #FB8B76;
+}
+
+.bg-yellow {
+    background-color: #FCBA50;
+}
+
+.bg-blue {
+    background-color: #3DC5D0;
+}
+
+.bg-blue2 {
+    background-color: #04ADE7;
+}
+
+.bg-gray {
+    background-color: #FDFDFE;
+}
+
+
+/*字体大小样式*/
+
+.F10 {
+    font-size: 10px;
+}
+
+.F11 {
+    font-size: 11px;
+}
+
+.F12 {
+    font-size: 12px;
+}
+
+.F13 {
+    font-size: 13px;
+}
+
+.F14 {
+    font-size: 14px;
+}
+
+.F16 {
+    font-size: 16px;
+}
+
+.F18 {
+    font-size: 18px;
+}
+
+
+/*字体样式*/
+
+.FB {
+    font-weight: bold;
+}
+
+.FN {
+    font-weight: normal;
+}
+
+.FI {
+    font-style: italic;
+}
+
+
+
+/*相对位置*/
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+
+/*宽度*/
+
+.w {
+    width: 100%
+}
+
+.w10 {
+    width: 10px
+}
+
+.w20 {
+    width: 20px
+}
+
+.w100 {
+    width: 100px
+}
+
+.w200 {
+    width: 200px
+}
+
+.w300 {
+    width: 300px
+}
+
+.w500 {
+    width: 500px
+}
+
+.w800 {
+    width: 800px
+}
+
+.h {
+    height: 100%
+}
+
+
+/*高度*/
+
+.h30 {
+    height: 30px;
+}
+
+.lh30 {
+    line-height: 30px;
+}
+
+.h40 {
+    height: 40px;
+}
+
+.lh40 {
+    line-height: 40px;
+}
+
+.h50 {
+    height: 50px
+}
+
+.lh50 {
+    line-height: 50px;
+}
+
+.h80 {
+    height: 80px
+}
+
+.lh80 {
+    line-height: 80px;
+}
+
+.h100 {
+    height: 100px
+}
+
+.h200 {
+    height: 200px
+}
+
+
+/*边距*/
+
+.m15 {
+    margin: 15px
+}
+
+.mt15 {
+    margin-top: 15px
+}
+
+.mb15 {
+    margin-bottom: 15px
+}
+
+.ml15 {
+    margin-left: 15px
+}
+
+.mr15 {
+    margin-right: 15px
+}
+
+.p15 {
+    padding: 15px;
+}
+
+.pt15 {
+    padding-top: 15px
+}
+
+.pb15 {
+    padding-bottom: 15px
+}
+
+.pl15 {
+    padding-left: 15px
+}
+
+.pr15 {
+    padding-right: 15px
+}

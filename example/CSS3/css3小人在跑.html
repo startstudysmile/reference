@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        @keyframes leftMove {
+            from{
+                transform: rotate(40deg);
+            }
+            to{
+                transform: rotate(-50deg);
+            }
+        }
+        @keyframes rightMove {
+            from{
+                transform: rotate(-50deg);
+            }
+            to{
+                transform: rotate(40deg);
+            }
+        }
+        @keyframes bodyMove  {
+            from{
+                left:0;
+            }
+            to{
+                left: 80%;
+            }
+        }
+        body{
+            overflow: hidden;
+            min-height: 400px;
+            width: 100%;
+            background: linear-gradient(0deg, #999, #fff);
+            background-repeat: no-repeat;
+        }
+        .ab>div {
+            position: absolute;
+            left: 50%;
+            background-color: #111;
+        }
+        .cont {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            animation: bodyMove 9s  infinite;
+            animation-timing-function: linear;
+        }
+        .head{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-left: -20px;
+        }
+        .body{
+            width: 10px;
+            height: 150px;
+            top:50px;
+        }
+        .limb{
+            transform-origin: 0% 0%;
+        }
+        .hand{
+            width: 6px;
+            height: 70px;
+            top:80px
+        }
+        .leg{
+            width:  8px;
+            height: 80px;
+            top:200px;
+
+        }
+        .left{
+            transform: rotate(-40deg);
+        }
+        .right{
+            transform: rotate(40deg);
+        }
+        .leg.left , .hand.left{
+            animation: leftMove 0.5s  infinite ;
+        }
+        .leg.right , .hand.right{
+            animation: rightMove 0.5s  infinite ;
+        }
+        .hand::after{
+            display: block;
+            content: ' ';
+            width: 6px;
+            height: 50px;
+            position: absolute;
+            top: 95%;
+            background: #111;
+            transform: rotate(-20deg);
+            left: -15%;
+            transform-origin: 0% 0%;
+        }
+        .leg i {
+            display: block;
+            content: ' ';
+            width: 8px;
+            height: 50px;
+            position: absolute;
+            top: 95%;
+            background: #111;
+            transform: rotate(30deg);
+            left: 30%;
+            transform-origin: 0% 0%;
+
+        }
+        .leg i::before{
+            display: block;
+            content: ' ';
+            width: 8px;
+            height: 18px;
+            position: absolute;
+            top: 100%;
+            background: #111;
+            transform: rotate(-70deg);
+            transform-origin: 0% 0%;
+            border-bottom-right-radius: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="cont ab">
+        <div class="head"></div>
+        <div class="body "></div>
+        <div class="limb hand left"></div>
+        <div class="limb hand right"></div>
+        <div class="limb leg left"><i></i></div>
+        <div class="limb leg right"><i></i></div>
+    </div>
+
+</body>
+</html>

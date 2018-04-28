@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Star</title>
+    <link rel="stylesheet" href="css/mainStyle.css">
+</head>
+
+<body>
+    <canvas id="star"></canvas>
+    <script>
+        function drawStar(id, starStyle) {
+            /**
+             * id: canvas id
+             * starStyle: 星星样式。格式：{
+                    x: 圆心横坐标,
+                    y: 圆心纵坐标,
+                    R: 大圆半径,
+                    r: 小圆半径,
+                    color: 颜色,
+                    fill: 是否填充（默认否）
+                }
+             */
+            var star = document.getElementById(id);
+            if (star.getContext) {
+                var context = star.getContext('2d');
+                var myStar = {
+                    x: starStyle.x ? starStyle.x : 50,
+                    y: starStyle.y ? starStyle.y : 50,
+                    R: starStyle.R ? starStyle.R : 20,
+                    r: starStyle.r ? starStyle.r : 10,
+                    color: starStyle.color ? starStyle.color : '#000',
+                    fill: starStyle.fill ? starStyle.fill : false
+                };
+                context.beginPath();
+                if (myStar.fill) {
+                    context.fillStyle = myStar.color;
+                } else {
+                    context.strokeStyle = myStar.color;
+                }
+                context.moveTo(myStar.x, myStar.y - myStar.R);
+                for (var i = 0; i < 5; i++) {
+                    // 外圆
+                    var angle1 = 2 * Math.PI / 5 * i;
+                    var x1 = myStar.x + myStar.R * Math.sin(angle1);
+                    var y1 = myStar.y - myStar.R * Math.cos(angle1);
+                    // 内圆
+                    var angle2 = angle1 + 2 * Math.PI / 10;
+                    var x2 = myStar.x + myStar.r * Math.sin(angle2);
+                    var y2 = myStar.y - myStar.r * Math.cos(angle2);
+
+                    context.lineTo(x1, y1);
+                    context.lineTo(x2, y2);
+                }
+                context.lineTo(myStar.x, myStar.y - myStar.R);
+                if (myStar.fill) {
+                    context.fill();
+                } else {
+                    context.stroke();
+                }
+            }
+
+        }
+        drawStar('star', {
+            x: 100,
+            y: 100,
+            R: 50,
+            r: 20,
+            color: 'red',
+            fill: true
+        });
+    </script>
+</body>
+
+</html>

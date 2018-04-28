@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>canvas桃心闪闪</title>
+        <style type="text/css">
+            html,body{
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            .canvas{
+                background: #222;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" class="canvas"></canvas>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+
+             window.requestAnimFrame = (function(){
+              return  window.requestAnimationFrame       || 
+                      window.webkitRequestAnimationFrame || 
+                      window.mozRequestAnimationFrame    || 
+                      window.oRequestAnimationFrame      || 
+                      window.msRequestAnimationFrame     || 
+                      function(/* function */ callback, /* DOMElement */ element){
+                        window.setTimeout(callback, 1000 / 60);
+                      };
+            })();
+
+            $(document).ready(function(){
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                var num = 20;//桃心数量
+                var peachArr = [];//存放桃心数组
+                var textCon = "just for you~";//落款内容
+                var textSize = 3;//落款字体大小
+                var opacity = Math.random();
+
+                //桃心
+                function Peach(){
+                    this.x = canvas.width/2;
+                    this.y = canvas.width/2;
+                    this.con = "♥";//内容
+                    this.angle = 0; //角度
+                    this.size = 30;//字体大小
+                    this.bg = "#FD6790";
+                    this.borderC = "#fff";
+                    this.t = 180;//弧度
+                    this.r = 15;//半径
+                }
+
+                function createPeach(){
+                    while(num--){
+                        var peach = new Peach();
+                        peachArr.push(peach);
+                        peach.x = Math.random()*canvas.width;
+                        peach.y = Math.random()*canvas.height;
+                        peach.draw();
+                        animatePeach(peach);
+                    }
+                }
+
+                //画桃心
+                Peach.prototype.draw = function(){
+                    ctx.beginPath();
+                    ctx.fillText(this.con,this.x,this.y);
+                    ctx.strokeText(this.con,this.x,this.y);
+                    ctx.font = this.size + "px Calibri";
+                    ctx.fillStyle = this.bg;
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = this.borderC;
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fill();
+                }
+
+                function animatePeach(peach){
+
+                    /*ctx.fillStyle = "rgba(0,0,0,"+opacity+")";
+                    ctx.fillRect(0,0,canvas.width,canvas.height);*/
+
+                    peach.t++;
+                    peach.x = canvas.width/2 + peach.r * (16 * Math.pow(Math.sin(peach.t), 3));
+                    peach.y = canvas.height/2 - peach.r * (13 * Math.cos(peach.t) - 5 * Math.cos(2 * peach.t) - 2 * Math.cos(3 * peach.t) - Math.cos(4 * peach.t));
+
+                    if(peach.size<50){
+                        peach.size+=3;
+                    }else{
+                        peach.size = 30;
+                    }
+                    peach.draw();
+
+                    requestAnimationFrame(function(){
+                        animatePeach(peach);
+                    });
+                }
+
+                var peach = new Peach();
+                createPeach();
+                drawText();
+
+                function drawText(){
+                    ctx.beginPath();
+                    ctx.fillText("----- "+textCon,canvas.width*0.7,canvas.height*0.9);
+                    ctx.font = textSize + "px Arial";
+                    ctx.fillStyle = this.bg;
+                    ctx.lineWidth = 1;
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+            });
+        </script>
+    </body>
+</html>

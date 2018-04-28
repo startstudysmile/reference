@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		
+		
+	</body>
+</html>
+<script>
+    var canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    var w = canvas.width = window.innerWidth;
+    var h = canvas.height = window.innerHeight;
+    ctx = canvas.getContext('2d');
+
+    var yzx = {
+        _data:[],
+        lineNum: 20,
+    }
+    for(var k = 0; k < yzx.lineNum; k ++) {
+        yzx._data[k] = {};
+        yzx._data[k].x = Math.floor(Math.random() * w);
+        yzx._data[k].y = Math.floor(Math.random() * h);
+        yzx._data[k].my = Math.floor(Math.random() * 10 + 10);
+    }
+
+    !function draw() {
+        ctx.clearRect(0,0,w,h);
+        for(var j = 0; j < yzx.lineNum; j ++) {
+            yzx._data[j].y += yzx._data[j].my;
+            if(yzx._data[j].y > h + 100) {
+                yzx._data[j].y = -(yzx._data[j].y - h);
+                yzx._data[j].x = Math.floor(Math.random() * w);
+            }
+            star(yzx._data[j].x,yzx._data[j].y);
+        }
+        window.requestAnimationFrame(draw)
+    }();
+
+    function star(x,y) {
+        var color = 1;
+        for(var i = 0; i < 100; i++) {
+            ctx.beginPath();
+            color = color - 0.01;
+            ctx.fillStyle = 'rgba(255,255,0,'+color+')';
+            y = y - 2;
+            ctx.arc(x, y, 2, 0, Math.PI * 2, true);
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+
+</script>

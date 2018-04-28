@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        body{padding: 0;margin: 0;background: rgb(5,13,26);}
+        canvas{display: block;}
+    </style>
+</head>
+<body>
+    <canvas>你的浏览器不支持Canvas</canvas>
+    <script type="text/javascript">
+    (function(){
+        var canvas = document.getElementsByTagName('canvas')[0],
+            ctx = canvas.getContext('2d'),
+            wW = window.innerWidth,
+            wH = window.innerHeight;
+        canvas.width = wW;canvas.height = wH;
+        var wwCenter = wW/2,whCenter = wH/2;
+        var wlong = whCenter>wwCenter?whCenter:wwCenter;
+        function random(a,b){
+            return a+Math.random()*(b-a);
+        }
+        function littleStar() {}
+        littleStar.prototype = {
+            init : function(){
+                this.opi = random(0.6,0.9);
+                this.deg = random(0,360)*Math.PI/180;
+                this.speed = 0.1*Math.PI/180;
+                this.opispeed = 0.01*(random(-4,4)|0);
+                console.log(this.opispeed)
+                this.r = random(1,6);
+                this.y = random(4,wlong);
+                this.isRun = random(0,10)>3?true:false;
+                return this;
+            },
+            draw : function(){
+                ctx.save();
+                ctx.beginPath();
+                ctx.translate(wwCenter,whCenter);
+                ctx.rotate(this.deg);
+                var gradient = ctx.createRadialGradient(0,this.y,this.r/4,0,this.y,this.r);
+                gradient.addColorStop(0, "rgba(134,134,134,"+this.opi +")" );
+                gradient.addColorStop(0.1, "rgba(29, 72, 140,.25)");
+                gradient.addColorStop(1, "rgba(29, 72, 140,0.01)");
+                ctx.fillStyle = gradient;
+                delete gradient;
+                ctx.arc(0,this.y,this.r,Math.PI*2,false);
+                ctx.fill();
+                ctx.closePath();
+                ctx.restore();
+            },
+            run :function(){
+                this.deg = (this.deg+this.speed)%(Math.PI*2);
+                this.opi -= this.opispeed;
+                if(this.opi<0.3||this.opi>0.9){
+                    this.opispeed = -this.opispeed;
+                }
+            }
+        }
+        var stars = [];
+        for(var i =0;i<400;i++){
+            var a = new littleStar().init();
+            stars.push(a);
+        }
+        function Starrun(){
+            ctx.clearRect(0,0,wW,wH);
+            stars.forEach(function(s){
+                if(s.isRun) {s.run()};
+                s.draw();
+            })
+            setTimeout(arguments.callee,1000/30);
+        }
+        Starrun();
+    }())
+    </script>
+</body>
+</html>

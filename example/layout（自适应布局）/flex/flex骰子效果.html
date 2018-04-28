@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                display: flex;
+                width: 100%;
+                height: 100%;
+            }
+            .item {
+                width: 100px;
+                height: 100px;
+                background: #FFFFFF;
+                border-radius: 20px;
+                box-shadow: 0px 0px 10px rgba(0,0,0,0.5) inset;
+                padding: 10px;
+                display: flex;
+                margin: 5px;
+            }
+            .icon {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #333333;
+                flex: none;
+            }
+            .center.item {
+                justify-content: center;
+            }
+            .icon.center {
+                align-self: center;
+            }
+            .item2, .item3 {
+                justify-content: space-between;
+                flex-direction: column;
+            }
+            .item2 .icon:nth-child(2),.item3 .icon:nth-child(3){
+                align-self: flex-end;
+            }
+            .item3 .icon:nth-child(2) {
+                align-self: center;
+            }
+            .item4, .item5,.item6,.item9 {
+                flex-flow: row wrap;
+                justify-content: space-between;
+            }
+            .column {
+                display: flex;
+                flex: 0 0 100%;
+                justify-content: space-between;
+            }
+            .item4 .column:nth-child(2),.item5 .column:nth-child(3),.item6 .column:nth-child(3),.item9 .column:nth-child(3){
+                align-self: flex-end;
+            }
+            .item5 .column:nth-child(2) {
+                justify-content: center;
+                align-items: center;
+            }
+            .item6 .column:nth-child(2),.item9 .column:nth-child(2) {
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center item">
+            <div class="center icon"></div>
+        </div>
+        <div class="item item2">
+            <div class="icon"></div>
+            <div class="icon"></div>
+        </div>
+        <div class="item item3">
+            <div class="icon"></div>
+            <div class="icon"></div>
+            <div class="icon"></div>
+        </div>
+        <div class="item item4">
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+        </div>
+        <div class="item item5">
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+            <div class="column">
+                <div class="icon"></div>
+            </div>
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+        </div>
+        <div class="item item6">
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+        </div>
+        <div class="item item9">
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+            <div class="column">
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+        </div>
+    </body>
+</html>

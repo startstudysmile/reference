@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>directive</title>
+  <style>
+      *{ margin:0; padding:0; list-style:none; border:none; box-sizing:border-box;}
+      .left{ float:left; }
+      .right{ float:right; }
+      .ov_h{ overflow:hidden; }
+      /*floor2 begin*/
+      .D_lunbo{  padding:30px 50px 30px 110px;  height:230px;}
+      .D_lunbo .swiperBox{  overflow:hidden; position:relative; width:100%; height:170px;}
+      .D_lunbo ul.listBox{  width:10000000px; overflow:hidden; position:absolute; left:0px; top:0px;}
+      .D_lunbo ul.listBox>li{ float:left; width:310px; }
+      .D_lunbo .pic{ width:110px; height:160px; overflow:hidden; background:pink;}
+      .D_lunbo .info{ width:200px; padding:0 10px; color:#3c3c3c;}
+      .D_lunbo .info .name{ font-size:16px;  margin-bottom:5px;}
+      .D_lunbo .info ul{ margin-bottom:5px;}
+      .D_lunbo .info ul li{ height:20px; line-height:20px; font-size:14px; overflow:hidden;}
+      .D_lunbo .info a{ background:#b14d17; padding:2px; color:#fff; color:#fff;}
+  </style>
+</head>
+<body>
+        <div class="floor floor2">
+            <div class="D_lunbo">
+                <div class="swiperBox">
+                    <ul class="listBox">
+                        <li class="list">
+                            <div class="pic left"></div>
+                            <div class="info left">
+                                <p class="name">郭学梅</p>
+                                <ul>
+                                    <li>副主任医师</li>
+                                    <li>北京中医研究院针灸研究所</li>
+                                    <li>原中心医院针灸科主任</li>
+                                    <li>山西中医针灸研究所</li>
+                                    <li>北京高级针灸进修班</li>
+                                </ul>
+                                <a href="javascript:;">在线咨询</a>
+                            </div>
+                        </li>
+                        <li class="list">
+                            <div class="pic left"></div>
+                            <div class="info left">
+                                <p class="name">郭学梅</p>
+                                <ul>
+                                    <li>副主任医师</li>
+                                    <li>北京中医研究院针灸研究所</li>
+                                    <li>原中心医院针灸科主任</li>
+                                    <li>山西中医针灸研究所</li>
+                                    <li>北京高级针灸进修班</li>
+                                </ul>
+                                <a href="javascript:;">在线咨询</a>
+                            </div>
+                        </li>
+                        <li class="list">
+                            <div class="pic left"></div>
+                            <div class="info left">
+                                <p class="name">郭学梅</p>
+                                <ul>
+                                    <li>副主任医师</li>
+                                    <li>北京中医研究院针灸研究所</li>
+                                    <li>原中心医院针灸科主任</li>
+                                    <li>山西中医针灸研究所</li>
+                                    <li>北京高级针灸进修班</li>
+                                </ul>
+                                <a href="javascript:;">在线咨询</a>
+                            </div>
+                        </li>
+                        <li class="list">
+                            <div class="pic left"></div>
+                            <div class="info left">
+                                <p class="name">郭学梅</p>
+                                <ul>
+                                    <li>副主任医师</li>
+                                    <li>北京中医研究院针灸研究所</li>
+                                    <li>原中心医院针灸科主任</li>
+                                    <li>山西中医针灸研究所</li>
+                                    <li>北京高级针灸进修班</li>
+                                </ul>
+                                <a href="javascript:;">在线咨询</a>
+                            </div>
+                        </li>
+                        <li class="list">
+                            <div class="pic left"></div>
+                            <div class="info left">
+                                <p class="name">郭学梅</p>
+                                <ul>
+                                    <li>副主任医师</li>
+                                    <li>北京中医研究院针灸研究所</li>
+                                    <li>原中心医院针灸科主任</li>
+                                    <li>山西中医针灸研究所</li>
+                                    <li>北京高级针灸进修班</li>
+                                </ul>
+                                <a href="javascript:;">在线咨询</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+  <script src="http://apps.bdimg.com/libs/jquery/1.7.2/jquery.js"></script>
+
+     <script type="text/javascript">
+        $(function(){
+            var timer = setInterval(autoPlay,50);
+            $(".swiperBox").mouseenter(function(){
+                clearInterval(timer);
+            });
+            $(".swiperBox").mouseleave(function(){
+               timer = setInterval(autoPlay,50);
+            })
+        })
+
+        var lis = $(".listBox").find(".list");
+        var liW = lis.width();
+        var liL = lis.length;
+        var listBoxW = liW*liL;
+        var leftMove = 0;
+        var timer = null;
+
+        $(".listBox").css({"width":listBoxW});
+
+        function autoPlay(){
+            clearInterval(timer);
+
+            leftMove-=3;
+            if(leftMove<-liW){
+                leftMove = 0;
+            }
+            $(".listBox").css({"left":leftMove});            
+        }       
+     </script>
+</body>
+</html>

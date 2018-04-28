@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="css/style.css" />
+        <style type="text/css">
+        	*{
+			    margin: 0;
+			    padding: 0;
+			}
+			html,body{
+			    height: 100%;
+			    overflow: hidden;
+			}
+			img{
+			    position: absolute;
+			    height: 100%;
+			    width: 100%;
+			}
+			.father{
+			    position: absolute;
+			    z-index: 99;
+			    width: 550px;
+			    top: 40%;
+			    left: 50%;
+			    transform: translate(-50%,-50%);
+			}
+			a{  
+			    cursor: pointer;
+			    position: absolute;
+			    text-align: center;
+			    text-decoration: none;
+			    width: 150px;
+			    height: 200px;
+			    float: left;
+			    margin-right: 50px;
+			    line-height: 200px;
+			    border-radius: 20px;
+			}
+			a:nth-child(1){
+			    background: lightblue;
+			    left: 0px;
+			}
+			a:nth-child(2){
+			    background: lightcoral;
+			    left: 200px;
+			}
+			a:nth-child(3){
+			    background: #cec;
+			    left: 400px;
+			}
+			a:after{
+			    content: '';
+			    width: 125px;
+			    height: 125px;
+			    border: 3px solid white;
+			    position: absolute;
+			    top: -60px;
+			    left: 9px;
+			    opacity: 0.7;
+			    border-radius: 50%;
+			}
+			/*background-size必须和background在同一个样式元素内设置样式*/
+			a:nth-child(1):after{
+			    background: url(../img/1.jpg);
+			    background-size: 80%;
+			}
+			a:nth-child(2):after{
+			    background: url(../img/2.jpg);
+			    background-size: 80%;
+			}
+			a:nth-child(3):after{
+			    background: url(../img/3.jpg);
+			    background-size: 80%;
+			}
+			a:hover:after{
+			    opacity: 0.9;
+			}
+			a:hover{
+			    color: white;
+			    font-family: "微软雅黑";
+			    /*多阴影，用的不多，冷门小知识*/
+			    text-shadow: 0 0 3px blue,
+			                 0 0 9px darkturquoise,
+			                 0 0 15px lightcoral;
+			}
+			/*:target伪类必须配合锚点使用，效果是锚点被选中时的样式*/
+			img:target{
+			    z-index: 30;
+			}
+			/*:not伪类*/
+			img:not(:target){
+			    z-index: 0;
+			}
+        </style>
+    </head>
+    <body>
+        <img class="bg bg1" id="bg1" src="img/1.jpg"/>
+        <img class="bg bg2" id="bg2" src="img/2.jpg"/>
+        <img class="bg bg3" id="bg3" src="img/3.jpg"/>
+        <div class="father">
+            <a href="#bg1">背景一</a>
+            <a href="#bg2">背景二</a>
+            <a href="#bg3">背景三</a>
+        </div>
+    </body> 
+</html>
