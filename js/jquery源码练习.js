@@ -97,9 +97,127 @@
 		splice:arr.splice
 	};
 	jQuery.extend=jQuery.fn.extend=function(){
-		
+		var options;
+		var name;
+		var src;
+		var copy;
+		var copyIsArray;
+		var clone;
+		var target=arguments[0]||{};
+		var i=1;
+		var length=arguments.length;
+		var deep=false;
+		if(typeof target=="boolean"){
+			deep=target;
+			target=arguments[i]||{};
+			i++;
+		}
+		if(typeof target!="object"&&!jQuery.isFunction(target)){
+			target={};
+		}
+		if(i===length){
+			target=this;
+			i--;
+		}
+		for(;i<length;i++){
+			if((options=arguments[i])!=null){
+				for(name in options){
+					src=target[name];
+					copy=options[name];
+					if(target===copy){
+						continue;
+					}
+					if(deep&&copy&&(jQuery.isPlainObject(copy)||(copyIsArray=jQuery.isArray(copy)))){
+						if(copyIsArray){
+							copyIsArray=false;
+							clone=src&&jQuery.isArray(src)?src:[];
+						}else{
+							clone=src&&jQuery.isPlainObject(src)?sec:{};
+						}
+						target[name]=jQuery.extend(deep,clone,copy);
+					}else if(copy!==undefined){
+						target[name]=copy;
+					}
+				}
+			}
+		}
+		return target;
 	};
-	jQuery.extend()
+	jQuery.extend({
+		expando:"jQuery" +(version+Math.random()).replace( /\D/g, "" ),
+		isReady:true;
+		error:function(msg){
+			throw new Error(msg);
+		},
+		noop:function(){
+			
+		},
+		isFunction:function(obj){
+			return jQuery.type(obj)==="function";
+		},
+		isArray:Array.isArray,
+		isWindow:function(obj){
+			return obj!=null&&obj===obj.window;
+		},
+		isNumeric:function(obj){
+			var type=jQuery.type(obj);
+			return (type==="number"||type==="string")&&(!isNaN(obj-parseFloat(obj)));
+		},
+		isPlainObject:fucntion(obj){
+			var proto,
+			var Ctor,
+			if(!obj||toString().call(obj)!="[Object Object]"){
+				return false;
+			}
+			proto=getProto(obj);
+			if(!proto){
+				return true;
+			}
+			Ctor=hasOwn.call(ctor,"constructor")&&proto.constructor;
+			return typeof Ctor==="function"&&fnToString.call(Ctor)===ObjectFunctionString;
+		},
+		isEmptyObject:function(obj){
+			var name,
+			for(name in obj){
+				return false;
+			}
+			return true;
+		},
+		type:function(obj){
+			if(obj==null){
+				return obj+"";
+			}
+			return typeof obj==="object"||typeof obj ==="function"?class2type[toString.call( obj )]||"object":typeof obj;
+		},
+		globalEval:function(code){
+			DOMEval(code);
+		},
+		camelcase:function(string){
+			return string.replace(rmsPrefix,"ms-").replace(rdashAlpha,fcamelCase);
+		},
+		nodeName:function(elem,name){
+			return elem.nodeName&&elem.nodeName.toLowerCase()===name.toLowerCase();
+		},
+		each:function(obj,callback){
+			var length=0;
+			var i=0;
+			if(isArrayLike(obj)){
+				length=obj.length;
+				for(;i<length;i++){
+					if(callback.call(obj[ i ], i, obj[ i ])===false){
+						break;
+					}
+				}
+			}else{
+				for(i in obj){
+					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+						break;
+					}
+				}
+			}
+			return obj;
+		},
+	});
 }
 	
 );
