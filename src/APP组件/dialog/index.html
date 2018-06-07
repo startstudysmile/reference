@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>移动端弹出提示框</title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/dialog.js"></script>
+	<style type="text/css">
+		* {margin:0;padding:0;}
+		a {text-decoration: none;}
+		button{border: none;}
+		/*点击按钮部分样式*/
+		button {margin: 20px; display: inline-block;height:30px;line-height: 30px;padding: 0px 20px;background: #0077FF;color: #FFF;border-radius: 4px;}
+		/*遮罩层样式*/
+		.dialog-mobile-cover {position: fixed;top: 0;right: 0;bottom: 0;left: 0;text-align: center;z-index:100000;background-color: rgba(0,0,0,.3);}
+		.dialog-mobile-cover:before {content: '';width: 0;height: 100%;display: inline-block;vertical-align: middle;}
+		/*提示框内容部分样式*/
+		.dialog-content {
+			display: inline-block;
+			vertical-align: middle;
+			background-color: #fff;
+			width: 80%;
+			border-radius: 6px;
+			overflow: hidden;
+		}
+		/*提示框文本部分样式*/
+		.dialog-inner-content {
+			overflow: hidden;
+			width: 100%;
+			line-height: 40px;
+			color: #333;
+			font-size: 16px;
+		}
+		/*提示框按钮部分样式*/
+		.dialog-btn-container {
+			height: 80px;
+			text-align: center;
+			overflow: hidden;
+		}
+		.dialog-btn-container:before {
+			content: '';
+			width: 0;
+			height: 100%;
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.dialog-btn-container > a {
+			display: inline-block;
+			height: 36px;
+			line-height: 36px;
+			vertical-align: middle;
+			padding:0 35px;
+			margin:0 15px;
+			color: #fff;
+			border-radius: 4px;
+		}
+		.dialog-ok{
+			background:#00ABEB;
+		}
+		.dialog-ok:hover{
+			background: #007AFF;
+		}
+		.dialog-cancel{
+			background: #D1D6D7;
+		}
+		
+	</style>
+</head>
+<body>
+	<button class="btn1">连续提示框</button>
+	<button class="btn2">警告提示框</button>
+	<button class="btn3">单个按钮提示框</button>
+	<button class="btn4">自定义提示框</button>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('.btn1').click(function(){
+			var dialog_content1='是否进入下一步';
+			var dialog_content2='确认删除？';
+			dialog(dialog_content1,'下一步','取消',function(){
+				dialog(dialog_content2,'确认','退出',function(){
+					alert('你点击了“确认”按钮');
+				})
+			});
+		});
+		$('.btn2').click(function(){
+			dialog('警告框','','');
+			
+		});
+		$('.btn3').click(function(){
+			dialog('单个按钮提示框','确认','');
+		});
+		$('.btn4').click(function(){
+			var dialog_content='<div style="background:#007AFF;color:#FFF;text-align:center;padding:5px 0px">\
+									提示框提示测试内容(第二个提示框)\
+								</div>\
+								';
+			dialog(dialog_content,'确认','取消',function(){
+				alert('你点击了“确认”按钮');
+			})
+		});
+	});
+</script>
+</html>
